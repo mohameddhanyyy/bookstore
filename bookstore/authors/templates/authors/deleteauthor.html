@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Delete Author{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Are you sure you want to delete "{{ object.name }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'authors:authors' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

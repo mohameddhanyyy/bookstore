@@ -1,13 +1,11 @@
+
 {% extends "layouts/base.html" %}
 
-{% load static %}
-
-{% block title %}Home{% endblock %}
+{% block title %}Book List{% endblock %}
 
 {% block content %}
     <h1>Book List</h1>
-
-    <a href="{% url 'createbook' %}" class="btn btn-secondary my-4">Add Book</a>
+    <a href="{% url 'books:createbook' %}" class="btn btn-secondary my-4">Add Book</a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -24,16 +22,26 @@
             {% for book in booklist %}
             <tr>
                 <td>{{ book.id }}</td>
-                <td>{{ book.name }}</td>
+                <td><a href="{% url 'books:bookdetail' book.id %}">{{ book.name }}</a></td>
                 <td>{{ book.author }}</td>
-                <td>{{ book.no_pages }}</td>
+                <td>{{ book.pages }}</td>
                 <td>{{ book.price }}</td>
-                <td><img src="{{book.image_url}}" width="50" height="50" alt="Book Cover"></td>
                 <td>
-                    <a href="{{book.show_url}}" class="btn btn-info">Show</a>
-                    <a href="{{book.edit_url}}" class="btn btn-warning">Edit</a>
-                    <a href="{% url 'bookdelete' book.id %}" class="btn btn-danger">Delete</a>
+                    {% if book.cover %}
+                    <img src="{{ book.cover.url }}" alt="{{ book.name }}" style="width: 100px;">
+                    {% endif %}
                 </td>
+                <td>
+                    <a href="{% url 'books:editbook' book.id %}" class="btn btn-primary">Edit</a>
+                    <form action="{% url 'books:deletebook' book.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No books available.</td>
             </tr>
             {% endfor %}
         </tbody>

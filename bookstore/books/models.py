@@ -8,11 +8,12 @@ from authors.models import Author
 
 class Book(models.Model):
     name = models.CharField(max_length=100)
-    no_pages = models.IntegerField()
+    pages = models.IntegerField()
 
     author = models.ForeignKey    (
         Author,
         on_delete=models.CASCADE,
+        related_name="books",
         null=True,
         blank=True
     )

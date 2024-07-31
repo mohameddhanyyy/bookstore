@@ -19,8 +19,7 @@
                     <li class="list-group-item"><strong>Author:</strong> {{ book.author }}</li>
                     <li class="list-group-item"><strong>Price:</strong> {{ book.price }}</li>
                 </ul>
-                <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to List</a>
-                {% comment %} <a href="{{book.show_author}}" class="btn btn-primary mt-3">Show Author</a> {% endcomment %}
+                <a href="{% url 'books:home' %}" class="btn btn-secondary mt-3">Back to List</a>
             </div>
         </div>
     </div>

@@ -6,19 +6,29 @@
 
 {% block content %}
     <div class="container">
-        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to List</a>
+        <a href="{% url 'authors:createauthor' %}" class="btn btn-secondary mt-3">Add Author</a>
+        <a href="{% url 'books:home' %}" class="btn btn-secondary mt-3">Back to List</a>
+
+        <h1 class="my-4">Authors</h1>
         <div class="row">
         {% for author in authors %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="{{ author.image.url }}" class="card-img-top" alt="{{ author.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ author.name }}</h5>
-                        <p class="card-text">Birth Date: {{ author.bdate }}</p>
-                        <p> Books: {{ author.books }}</p>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ author.image.url }}" class="card-img-top" alt="{{ author.name }}" width="200" height="300">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ author.name }}</h5>
+                            <p class="card-text">Birth Date: {{ author.bdate }}</p>
+                            <p>Books:</p>
+                            <ul>
+                                {% for book in author.books.all %}
+                                    <li>{{ book.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <a href="{% url 'authors:editauthor' author.id %}" class="btn btn-primary">Edit Author</a>
+                            <a href="{% url 'authors:deleteauthor' author.id %}" class="btn btn-danger">Delete Author</a>
+                        </div>
                     </div>
                 </div>
-            </div>
         {% endfor %}
         </div>
     </div>

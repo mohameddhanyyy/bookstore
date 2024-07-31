@@ -23,8 +23,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("books.urls")), 
+    path("books/", include(("books.urls", "books"), namespace="books")),
     path("authors/", include("authors.urls")),
     # path("authors/", include("authors.urls", namespace="authors")),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

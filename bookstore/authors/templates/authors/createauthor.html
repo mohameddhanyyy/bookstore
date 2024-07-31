@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block title %}Create Author{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Create Author</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Enter author's name">
+        </div>
+
+        <div class="mb-3">
+            <label for="bdate">Birth Date</label>
+            <input type="date" name="bdate" class="form-control" id="bdate">
+        </div>
+
+        <div class="mb-3">
+            <label for="image">Image</label>
+            <input type="file" name="image" class="form-control" id="image">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
