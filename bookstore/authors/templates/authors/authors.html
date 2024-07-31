@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block title %}Authors{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to List</a>
+        <div class="row">
+        {% for author in authors %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ author.image.url }}" class="card-img-top" alt="{{ author.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ author.name }}</h5>
+                        <p class="card-text">Birth Date: {{ author.bdate }}</p>
+                        <p> Books: {{ author.books }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
